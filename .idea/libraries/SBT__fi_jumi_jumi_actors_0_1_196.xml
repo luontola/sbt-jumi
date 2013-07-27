@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="SBT: fi.jumi:jumi-actors:0.1.196">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/fi.jumi/jumi-actors/jars/jumi-actors-0.1.196.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.ivy2/cache/fi.jumi/jumi-actors/docs/jumi-actors-0.1.196-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/fi.jumi/jumi-actors/srcs/jumi-actors-0.1.196-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -25,6 +25,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="SBT: fi.jumi:jumi-launcher:0.5.365" level="project" />
+    <orderEntry type="library" name="SBT: fi.jumi:jumi-core:0.5.365" level="project" />
+    <orderEntry type="library" name="SBT: fi.jumi:jumi-actors:0.1.196" level="project" />
+    <orderEntry type="library" name="SBT: fi.jumi:jumi-api:0.5.365" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="SBT: org.scala-sbt:sbt:0.12.4:provided" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="SBT: org.scala-sbt:main:0.12.4:provided" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="SBT: org.scala-sbt:actions:0.12.4:provided" level="project" />
@@ -67,6 +71,8 @@
     <orderEntry type="library" scope="PROVIDED" name="SBT: org.scala-sbt:precompiled-2_8_2:0.12.4:provided" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="SBT: org.scala-sbt:precompiled-2_9_3:0.12.4:provided" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="SBT: org.scala-sbt:precompiled-2_10_1:0.12.4:provided" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.specsy:specsy-scala_2.9.2:2.1.0:test" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.specsy:specsy-core:2.1.0:test" level="project" />
   </component>
 </module>
 
