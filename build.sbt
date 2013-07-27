@@ -1,5 +1,7 @@
-name := "jumi-sbt"
+name := "sbt-jumi"
 
-version := "0.1"
+version := "0.1-SNAPSHOT"
 
-scalaVersion := "2.9.3"
+scalaVersion := "2.9.2"
+
+sbtPlugin := true
