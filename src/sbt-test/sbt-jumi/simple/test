@@ -1,5 +1,5 @@
-$ copy changes/PassingTest.scala src/test/scala/
+$ copy-file changes/PassingTest.scala src/test/scala/PassingTest.scala
 > jumi-test
 
-$ copy changes/FailingTest.scala src/test/scala/
+$ copy-file changes/FailingTest.scala src/test/scala/FailingTest.scala
 -> jumi-test
