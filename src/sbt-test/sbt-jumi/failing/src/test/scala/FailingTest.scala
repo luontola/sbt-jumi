@@ -4,7 +4,7 @@
 
 import org.specsy.scala.ScalaSpecsy
 
-object FailingTest extends ScalaSpecsy {
+class FailingTest extends ScalaSpecsy {
   "a failing tests" >> {
     throw new AssertionError("dummy failure")
   }

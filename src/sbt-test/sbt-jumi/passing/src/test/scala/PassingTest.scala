@@ -4,7 +4,7 @@
 
 import org.specsy.scala.ScalaSpecsy
 
-object PassingTest extends ScalaSpecsy {
+class PassingTest extends ScalaSpecsy {
   "a passing tests" >> {
   }
 }
