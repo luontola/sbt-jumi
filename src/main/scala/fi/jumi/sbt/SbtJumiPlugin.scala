@@ -22,8 +22,10 @@ object SbtJumiPlugin extends Plugin {
       setClassPath(testClasspath map (_.data.toPath): _*).
       addJvmOptions("-ea"). // TODO: parameterize
       setIncludedTestsPattern("glob:**Test.class") // TODO: parameterize
-    bootstrap.
-      //enableDebugMode().
-      runSuite() // TODO: make fail without throwing the exception from here
+    try {
+      bootstrap.runSuite()
+    } catch {
+      case e: AssertionError => throw new TestsFailedException
+    }
   }
 }
