@@ -21,8 +21,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../src/test/scala" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../src/test/resources" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../src/sbt-test/sbt-jumi/passing/src/test/scala" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../src/sbt-test/sbt-jumi/failing/src/test/scala" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../src/sbt-test/sbt-jumi/simple/changes" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/../target" />
     </content>
     <orderEntry type="inheritedJdk" />
