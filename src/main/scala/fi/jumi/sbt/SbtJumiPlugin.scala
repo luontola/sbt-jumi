@@ -8,13 +8,14 @@ import sbt._
 
 object SbtJumiPlugin extends Plugin {
 
-  val hello = TaskKey[Unit]("hello", "A dummy task")
+  val jumiTest = TaskKey[Unit]("jumi-test", "Run tests using Jumi")
 
   override val settings = Seq(
-    hello := doHello
+    jumiTest := runTests
   )
 
-  def doHello() {
+  def runTests() {
+    // TODO
     println("Hello form sbt-jumi")
   }
 }
