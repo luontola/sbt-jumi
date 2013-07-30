@@ -8,7 +8,9 @@ scalaVersion := "2.9.2"
 
 sbtPlugin := true
 
-libraryDependencies += "fi.jumi" % "jumi-launcher" % "0.5.365"
+resolvers += "Local Maven Repository" at Path.userHome.asFile.toURI.toURL+"/.m2/repository"
+
+libraryDependencies += "fi.jumi" % "jumi-launcher" % "0.5-SNAPSHOT"
 
 ScriptedPlugin.scriptedSettings
 
