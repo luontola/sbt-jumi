@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="SBT: fi.jumi:jumi-launcher:0.5.376">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/fi.jumi/jumi-launcher/jars/jumi-launcher-0.5.376.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.ivy2/cache/fi.jumi/jumi-launcher/docs/jumi-launcher-0.5.376-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/fi.jumi/jumi-launcher/srcs/jumi-launcher-0.5.376-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
