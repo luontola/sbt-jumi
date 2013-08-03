@@ -7,8 +7,9 @@ package fi.jumi.sbt
 import org.junit._
 import org.junit.Assert._
 import fi.jumi.core.config._
-import java.lang.reflect.Modifier
-import sbt.SettingKey
+import java.lang.reflect.{Method, Modifier}
+import sbt.{SettingKey, Scoped}
+import sbt.Def.Setting
 
 class SbtJumiPluginTest {
 
@@ -33,6 +34,18 @@ class SbtJumiPluginTest {
     }
   }
 
+  @Test
+  def all_keys_have_a_default_value_in_settings() {
+    val keyMethods = SbtJumiPlugin.getClass.getMethods.toSeq filter isSettingOrTaskKey
+    val keysByName = keyMethods.map(m => m.getName -> m.invoke(SbtJumiPlugin).asInstanceOf[Scoped])
+    val settingsByKey = SbtJumiPlugin.settings.map(s => (s.key.key.label, s)).toMap[String, Setting[_]]
+
+    keysByName.foreach {
+      case (name, key) =>
+        assertNotNull("not present in settings: " + name, settingsByKey.getOrElse(name, null))
+    }
+  }
+
 
   // helpers
 
@@ -53,4 +66,7 @@ class SbtJumiPluginTest {
 
   private def getInstanceFieldNames(clazz: Class[_]): Set[String] =
     clazz.getDeclaredFields.toSet filterNot (f => Modifier.isStatic(f.getModifiers)) map (_.getName)
+
+  private def isSettingOrTaskKey(method: Method): Boolean =
+    classOf[Scoped].isAssignableFrom(method.getReturnType)
 }

@@ -8,7 +8,8 @@ import sbt._
 import sbt.Keys._
 import fi.jumi.launcher.JumiBootstrap
 import fi.jumi.core.config._
-import java.nio.file.Path
+import java.nio.file.{Paths, Path}
+import scala.collection.JavaConversions._
 
 object SbtJumiPlugin extends Plugin {
 
@@ -22,16 +23,27 @@ object SbtJumiPlugin extends Plugin {
   val jumiExcludedTestsPattern = settingKey[String]("Test files to not run. Same syntax as in java.nio.file.FileSystem#getPathMatcher")
 
   val jumiDaemon = settingKey[DaemonConfigurationBuilder]("Daemon configuration")
-  val jumiIdleTimeout = settingKey[Long]("Timeout after which to shutdown the daemon process")
-  val jumiStartupTimeout = settingKey[Long]("Timeout after which to shutdown the daemon process")
-  val jumiTestThreadsCount = settingKey[Int]("Number of test threads")
   val jumiHome = settingKey[Path]("Path to Jumi's home directory")
+  val jumiTestThreadsCount = settingKey[Int]("Number of test threads")
+  val jumiStartupTimeout = settingKey[Long]("Timeout after which to shutdown the daemon process")
+  val jumiIdleTimeout = settingKey[Long]("Timeout after which to shutdown the daemon process")
   val jumiDebugModeEnabled = settingKey[Boolean]("Whether to show full debug information")
 
   override val settings = Seq(
     jumiTest <<= (jumiSuite, jumiDaemon, jumiDebugModeEnabled) map jumiTestTask dependsOn (compile in Test),
+
     jumiSuite <<= (fullClasspath in Test) map configureSuite,
+    jumiClasspath := SuiteConfiguration.DEFAULTS.getClassPath map Paths.get,
+    jumiJvmOptions := SuiteConfiguration.DEFAULTS.getJvmOptions,
+    jumiWorkingDirectory := Paths.get(SuiteConfiguration.DEFAULTS.getWorkingDirectory),
+    jumiIncludedTestsPattern := SuiteConfiguration.DEFAULTS.getIncludedTestsPattern,
+    jumiExcludedTestsPattern := SuiteConfiguration.DEFAULTS.getExcludedTestsPattern,
+
     jumiDaemon := new DaemonConfigurationBuilder(),
+    jumiHome := DaemonConfiguration.DEFAULTS.getJumiHome,
+    jumiTestThreadsCount := DaemonConfiguration.DEFAULTS.getTestThreadsCount,
+    jumiStartupTimeout := DaemonConfiguration.DEFAULTS.getStartupTimeout,
+    jumiIdleTimeout := DaemonConfiguration.DEFAULTS.getIdleTimeout,
     jumiDebugModeEnabled := false
   )
 
