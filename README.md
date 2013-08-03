@@ -23,4 +23,4 @@ Run the tests using the command:
 Building
 --------
 
-Test with: `sbt scripted`
+Test with: `sbt test scripted`
