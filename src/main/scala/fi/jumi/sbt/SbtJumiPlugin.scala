@@ -15,14 +15,14 @@ object SbtJumiPlugin extends Plugin {
 
   val jumiTest = TaskKey[Unit]("jumi-test", "Run tests using Jumi")
 
-  val jumiSuite = taskKey[SuiteConfigurationBuilder]("Suite configuration")
+  val jumiSuite = taskKey[SuiteConfigurationBuilder]("Configures the suite")
   val jumiClasspath = taskKey[Seq[Path]]("Classpath for running tests")
   val jumiJvmOptions = settingKey[Seq[String]]("JVM options for running tests")
   val jumiWorkingDirectory = settingKey[Path]("Working directory for running tests")
   val jumiIncludedTestsPattern = settingKey[String]("Test files to run. Same syntax as in java.nio.file.FileSystem#getPathMatcher")
   val jumiExcludedTestsPattern = settingKey[String]("Test files to not run. Same syntax as in java.nio.file.FileSystem#getPathMatcher")
 
-  val jumiDaemon = settingKey[DaemonConfigurationBuilder]("Daemon configuration")
+  val jumiDaemon = taskKey[DaemonConfigurationBuilder]("Configures the daemon")
   val jumiHome = settingKey[Path]("Path to Jumi's home directory")
   val jumiTestThreadsCount = settingKey[Int]("Number of test threads")
   val jumiStartupTimeout = settingKey[Long]("Timeout after which to shutdown the daemon process")
