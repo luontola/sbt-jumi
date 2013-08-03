@@ -16,7 +16,7 @@ object SbtJumiPlugin extends Plugin {
   val jumiTest = TaskKey[Unit]("jumi-test", "Run tests using Jumi")
 
   val jumiSuite = taskKey[SuiteConfigurationBuilder]("Suite configuration")
-  val jumiClasspath = settingKey[Seq[Path]]("Classpath for running tests")
+  val jumiClasspath = taskKey[Seq[Path]]("Classpath for running tests")
   val jumiJvmOptions = settingKey[Seq[String]]("JVM options for running tests")
   val jumiWorkingDirectory = settingKey[Path]("Working directory for running tests")
   val jumiIncludedTestsPattern = settingKey[String]("Test files to run. Same syntax as in java.nio.file.FileSystem#getPathMatcher")
@@ -32,27 +32,29 @@ object SbtJumiPlugin extends Plugin {
   override val settings = Seq(
     jumiTest <<= (jumiSuite, jumiDaemon, jumiDebugModeEnabled) map jumiTestTask dependsOn (compile in Test),
 
-    jumiSuite <<= (fullClasspath in Test) map configureSuite,
-    jumiClasspath := SuiteConfiguration.DEFAULTS.getClassPath map Paths.get,
+    jumiSuite := new SuiteConfigurationBuilder().
+      setClassPath(jumiClasspath.value: _*).
+      setJvmOptions(jumiJvmOptions.value: _*).
+      setWorkingDirectory(jumiWorkingDirectory.value).
+      setIncludedTestsPattern(jumiIncludedTestsPattern.value).
+      setExcludedTestsPattern(jumiExcludedTestsPattern.value),
+    jumiClasspath := (fullClasspath in Test).value map (_.data.toPath),
     jumiJvmOptions := SuiteConfiguration.DEFAULTS.getJvmOptions,
     jumiWorkingDirectory := Paths.get(SuiteConfiguration.DEFAULTS.getWorkingDirectory),
     jumiIncludedTestsPattern := SuiteConfiguration.DEFAULTS.getIncludedTestsPattern,
     jumiExcludedTestsPattern := SuiteConfiguration.DEFAULTS.getExcludedTestsPattern,
 
-    jumiDaemon := new DaemonConfigurationBuilder(),
+    jumiDaemon := new DaemonConfigurationBuilder().
+      setJumiHome(jumiHome.value).
+      setTestThreadsCount(jumiTestThreadsCount.value).
+      setStartupTimeout(jumiStartupTimeout.value).
+      setIdleTimeout(jumiIdleTimeout.value),
     jumiHome := DaemonConfiguration.DEFAULTS.getJumiHome,
     jumiTestThreadsCount := DaemonConfiguration.DEFAULTS.getTestThreadsCount,
     jumiStartupTimeout := DaemonConfiguration.DEFAULTS.getStartupTimeout,
     jumiIdleTimeout := DaemonConfiguration.DEFAULTS.getIdleTimeout,
     jumiDebugModeEnabled := false
   )
-
-  private def configureSuite(testClasspath: Classpath): SuiteConfigurationBuilder = {
-    new SuiteConfigurationBuilder().
-      setClassPath(testClasspath map (_.data.toPath): _*).
-      addJvmOptions("-ea"). // TODO: parameterize
-      setIncludedTestsPattern("glob:**Test.class") // TODO: parameterize
-  }
 
   private def jumiTestTask(suite: SuiteConfigurationBuilder, daemon: DaemonConfigurationBuilder, debugMode: Boolean) {
     try {

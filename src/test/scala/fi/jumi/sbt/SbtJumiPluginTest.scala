@@ -8,29 +8,29 @@ import org.junit._
 import org.junit.Assert._
 import fi.jumi.core.config._
 import java.lang.reflect.{Method, Modifier}
-import sbt.{SettingKey, Scoped}
+import sbt.{TaskKey, SettingKey, Scoped}
 import sbt.Def.Setting
 
 class SbtJumiPluginTest {
 
   @Test
-  def has_setting_key_for_each_suite_parameter() {
+  def has_key_for_each_suite_parameter() {
     val expectedParameters = getInstanceFieldNames(classOf[SuiteConfiguration]) map formatKeyName
 
     expectedParameters.foreach {
       name =>
-        assertHasSettingKey(SbtJumiPlugin.getClass, name)
+        assertHasKey(SbtJumiPlugin.getClass, name)
     }
   }
 
   @Test
-  def has_setting_key_for_each_daemon_parameter() {
+  def has_key_for_each_daemon_parameter() {
     val hiddenParameters = Set("launcherPort", "logActorMessages")
     val expectedParameters = getInstanceFieldNames(classOf[DaemonConfiguration]) -- hiddenParameters map formatKeyName
 
     expectedParameters.foreach {
       name =>
-        assertHasSettingKey(SbtJumiPlugin.getClass, name)
+        assertHasKey(SbtJumiPlugin.getClass, name)
     }
   }
 
@@ -49,11 +49,11 @@ class SbtJumiPluginTest {
 
   // helpers
 
-  private def assertHasSettingKey(clazz: Class[_], name: String) {
+  private def assertHasKey(clazz: Class[_], name: String) {
     try {
       val method = clazz.getMethod(name)
       val returnType = method.getReturnType
-      if (returnType != classOf[SettingKey[_]]) {
+      if (returnType != classOf[SettingKey[_]] && returnType != classOf[TaskKey[_]]) {
         fail("property " + clazz.getName + "." + name + " had wrong type: " + returnType)
       }
     } catch {
