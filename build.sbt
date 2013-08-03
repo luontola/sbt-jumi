@@ -12,6 +12,14 @@ resolvers += "Local Maven Repository" at Path.userHome.asFile.toURI.toURL+"/.m2/
 
 libraryDependencies += "fi.jumi" % "jumi-launcher" % "0.5.376"
 
+libraryDependencies += "com.novocode" % "junit-interface" % "0.8" % "test->default"
+
+libraryDependencies += "junit" % "junit" % "4.11" % "test"
+
+libraryDependencies += "org.hamcrest" % "hamcrest-core" % "1.3" % "test"
+
+libraryDependencies += "org.hamcrest" % "hamcrest-library" % "1.3" % "test"
+
 ScriptedPlugin.scriptedSettings
 
 scriptedBufferLog := false
