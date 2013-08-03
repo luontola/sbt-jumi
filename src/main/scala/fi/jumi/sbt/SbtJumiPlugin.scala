@@ -57,13 +57,13 @@ object SbtJumiPlugin extends Plugin {
   )
 
   private def jumiTestTask(suite: SuiteConfigurationBuilder, daemon: DaemonConfigurationBuilder, debugMode: Boolean) {
+    val bootstrap = new JumiBootstrap()
+    bootstrap.suite = suite
+    bootstrap.daemon = daemon
+    if (debugMode) {
+      bootstrap.enableDebugMode()
+    }
     try {
-      val bootstrap = new JumiBootstrap()
-      bootstrap.suite = suite
-      bootstrap.daemon = daemon
-      if (debugMode) {
-        bootstrap.enableDebugMode()
-      }
       bootstrap.runSuite()
     } catch {
       case e: AssertionError => throw new TestsFailedException
