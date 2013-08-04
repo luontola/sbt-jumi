@@ -11,7 +11,7 @@ import fi.jumi.core.config._
 import java.nio.file.{Paths, Path}
 import scala.collection.JavaConversions._
 
-object SbtJumiPlugin extends Plugin {
+object JumiPlugin extends Plugin {
 
   val jumiTest = TaskKey[Unit]("jumi-test", "Run tests using Jumi")
 

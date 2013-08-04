@@ -11,7 +11,7 @@ import java.lang.reflect.{Method, Modifier}
 import sbt.{TaskKey, SettingKey, Scoped}
 import sbt.Def.Setting
 
-class SbtJumiPluginTest {
+class JumiPluginTest {
 
   @Test
   def has_key_for_each_suite_parameter() {
@@ -19,7 +19,7 @@ class SbtJumiPluginTest {
 
     expectedParameters.foreach {
       name =>
-        assertHasKey(SbtJumiPlugin.getClass, name)
+        assertHasKey(JumiPlugin.getClass, name)
     }
   }
 
@@ -30,15 +30,15 @@ class SbtJumiPluginTest {
 
     expectedParameters.foreach {
       name =>
-        assertHasKey(SbtJumiPlugin.getClass, name)
+        assertHasKey(JumiPlugin.getClass, name)
     }
   }
 
   @Test
   def all_keys_have_a_default_value_in_settings() {
-    val keyMethods = SbtJumiPlugin.getClass.getMethods.toSeq filter isSettingOrTaskKey
-    val keysByName = keyMethods.map(m => m.getName -> m.invoke(SbtJumiPlugin).asInstanceOf[Scoped])
-    val settingsByKey = SbtJumiPlugin.settings.map(s => (s.key.key.label, s)).toMap[String, Setting[_]]
+    val keyMethods = JumiPlugin.getClass.getMethods.toSeq filter isSettingOrTaskKey
+    val keysByName = keyMethods.map(m => m.getName -> m.invoke(JumiPlugin).asInstanceOf[Scoped])
+    val settingsByKey = JumiPlugin.settings.map(s => (s.key.key.label, s)).toMap[String, Setting[_]]
 
     keysByName.foreach {
       case (name, key) =>
