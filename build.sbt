@@ -23,3 +23,12 @@ libraryDependencies += "org.hamcrest" % "hamcrest-library" % "1.3" % "test"
 ScriptedPlugin.scriptedSettings
 
 scriptedBufferLog := false
+
+publishTo := {
+  if (version.value.trim.endsWith("-SNAPSHOT"))
+    Some(Classpaths.sbtPluginSnapshots)
+  else
+    Some(Classpaths.sbtPluginReleases)
+}
+
+publishMavenStyle := false
