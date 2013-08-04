@@ -15,6 +15,7 @@ object JumiPlugin extends Plugin {
 
   val jumiTest = TaskKey[Unit]("jumi-test", "Run tests using Jumi")
 
+  // Suite specific settings
   val jumiSuite = taskKey[SuiteConfigurationBuilder]("Configures the suite")
   val jumiClasspath = taskKey[Seq[Path]]("Classpath for running tests")
   val jumiJvmOptions = settingKey[Seq[String]]("JVM options for running tests")
@@ -22,15 +23,19 @@ object JumiPlugin extends Plugin {
   val jumiIncludedTestsPattern = settingKey[String]("Test files to run. Same syntax as in java.nio.file.FileSystem#getPathMatcher")
   val jumiExcludedTestsPattern = settingKey[String]("Test files to not run. Same syntax as in java.nio.file.FileSystem#getPathMatcher")
 
+  // Daemon specific settings
   val jumiDaemon = taskKey[DaemonConfigurationBuilder]("Configures the daemon")
   val jumiHome = settingKey[Path]("Path to Jumi's home directory")
   val jumiTestThreadsCount = settingKey[Int]("Number of test threads")
   val jumiStartupTimeout = settingKey[Long]("Timeout after which to shutdown the daemon process")
   val jumiIdleTimeout = settingKey[Long]("Timeout after which to shutdown the daemon process")
+
+  // UI specific settings
+  val jumiPassingTestsVisible = settingKey[Boolean]("Whether to show all tests instead of just the failing tests")
   val jumiDebugModeEnabled = settingKey[Boolean]("Whether to show full debug information")
 
   override val settings = Seq(
-    jumiTest <<= (jumiSuite, jumiDaemon, jumiDebugModeEnabled) map jumiTestTask dependsOn (compile in Test),
+    jumiTest <<= (jumiSuite, jumiDaemon, jumiPassingTestsVisible, jumiDebugModeEnabled) map jumiTestTask dependsOn (compile in Test),
 
     jumiSuite := new SuiteConfigurationBuilder().
       setClassPath(jumiClasspath.value: _*).
@@ -53,13 +58,16 @@ object JumiPlugin extends Plugin {
     jumiTestThreadsCount := DaemonConfiguration.DEFAULTS.getTestThreadsCount,
     jumiStartupTimeout := DaemonConfiguration.DEFAULTS.getStartupTimeout,
     jumiIdleTimeout := DaemonConfiguration.DEFAULTS.getIdleTimeout,
+
+    jumiPassingTestsVisible := false,
     jumiDebugModeEnabled := false
   )
 
-  private def jumiTestTask(suite: SuiteConfigurationBuilder, daemon: DaemonConfigurationBuilder, debugMode: Boolean) {
+  private def jumiTestTask(suite: SuiteConfigurationBuilder, daemon: DaemonConfigurationBuilder, passingTestsVisible: Boolean, debugMode: Boolean) {
     val bootstrap = new JumiBootstrap()
     bootstrap.suite = suite
     bootstrap.daemon = daemon
+    bootstrap.setPassingTestsVisible(passingTestsVisible)
     if (debugMode) {
       bootstrap.enableDebugMode()
     }
