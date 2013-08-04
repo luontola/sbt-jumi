@@ -38,7 +38,7 @@ class JumiPluginTest {
   def all_keys_have_a_default_value_in_settings() {
     val keyMethods = JumiPlugin.getClass.getMethods.toSeq filter isSettingOrTaskKey
     val keysByName = keyMethods.map(m => m.getName -> m.invoke(JumiPlugin).asInstanceOf[Scoped])
-    val settingsByKey = JumiPlugin.settings.map(s => (s.key.key.label, s)).toMap[String, Setting[_]]
+    val settingsByKey = JumiPlugin.jumiSettings.map(s => (s.key.key.label, s)).toMap[String, Setting[_]]
 
     keysByName.foreach {
       case (name, key) =>

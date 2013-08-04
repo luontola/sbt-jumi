@@ -34,7 +34,7 @@ object JumiPlugin extends Plugin {
   val jumiPassingTestsVisible = settingKey[Boolean]("Whether to show all tests instead of just the failing tests")
   val jumiDebugModeEnabled = settingKey[Boolean]("Whether to show full debug information")
 
-  override val settings = Seq(
+  val jumiSettings: Seq[Setting[_]] = Seq(
     jumiTest <<= (jumiSuite, jumiDaemon, jumiPassingTestsVisible, jumiDebugModeEnabled) map jumiTestTask dependsOn (compile in Test),
 
     jumiSuite := new SuiteConfigurationBuilder().
