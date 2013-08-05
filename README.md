@@ -1,19 +1,24 @@
 sbt-jumi
 ========
 
-An sbt plugin for running tests with [Jumi](http://jumi.fi/) in [sbt](http://www.scala-sbt.org/)
+An [sbt](http://www.scala-sbt.org/) plugin for running tests with [Jumi](http://jumi.fi/).
 
-**UNDER DEVELOPMENT**
+The binaries of this plugin are available in the [sbt plugin repository](http://scalasbt.artifactoryonline.com/scalasbt/sbt-plugin-releases/fi.jumi.sbt/sbt-jumi/)
+where sbt will find them automatically.
 
 
 User Guide
 ----------
 
-Build this plugin locally using `sbt publish-local` (it's still pre-alpha).
+Requires sbt 0.13.0
 
 Add the following line to your `project/plugins.sbt` file:
 
     addSbtPlugin("fi.jumi.sbt" % "sbt-jumi" % "0.1.0")
+
+Add the following line to your `build.sbt` file:
+
+    jumiSettings
 
 Run the tests using the command:
 
