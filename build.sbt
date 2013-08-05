@@ -2,7 +2,7 @@ organization := "fi.jumi.sbt"
 
 name := "sbt-jumi"
 
-version := "0.1-SNAPSHOT"
+version := "0.1.0"
 
 scalaVersion := "2.10.2"
 
