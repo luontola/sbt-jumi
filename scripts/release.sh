@@ -13,7 +13,7 @@ function contains-line() {
     grep --line-regexp --quiet --fixed-strings -e "$1"
 }
 
-function require-file-contains-line() {
+function demand-file-contains-line() {
     local file="$1"
     local expected="$2"
     cat "$file" | contains-line "$expected" || (echo "Add this line to $file and try again:"; echo "$expected"; exit 1)
@@ -25,7 +25,7 @@ function assert-file-contains-substring() {
     cat "$file" | grep --quiet --fixed-strings -e "$expected" || (echo "Error: file $file did not contain $expected"; exit 1)
 }
 
-function set_project_version()
+function set-project-version()
 {
     local file="build.sbt"
     local version="$1"
@@ -33,7 +33,7 @@ function set_project_version()
     assert-file-contains-substring "$file" "\"$version\""
 }
 
-function set_documentation_version()
+function set-documentation-version()
 {
     local file="README.md"
     local version="$1"
@@ -41,7 +41,7 @@ function set_documentation_version()
     assert-file-contains-substring "$file" "\"$version\""
 }
 
-function bump_version()
+function next-snapshot-version()
 {
     local prefix=`echo $1 | sed -n -r 's/([0-9]+\.[0-9]+\.)[0-9]+/\1/p'`
     local suffix=`echo $1 | sed -n -r 's/[0-9]+\.[0-9]+\.([0-9]+)/\1/p'`
@@ -50,21 +50,21 @@ function bump_version()
 }
 
 APP_NAME="sbt-jumi"
-NEXT_VERSION=`bump_version $RELEASE_VERSION`
+NEXT_VERSION=`next-snapshot-version $RELEASE_VERSION`
 
-require-file-contains-line README.md "### $APP_NAME $RELEASE_VERSION (`date --iso-8601`)"
+demand-file-contains-line README.md "### $APP_NAME $RELEASE_VERSION (`date --iso-8601`)"
 
 set -x
 
-set_project_version "$RELEASE_VERSION"
-set_documentation_version "$RELEASE_VERSION"
+set-project-version "$RELEASE_VERSION"
+set-documentation-version "$RELEASE_VERSION"
 git add -u
 git commit -m "Release $RELEASE_VERSION"
 git tag -s -m "$APP_NAME $RELEASE_VERSION" "v$RELEASE_VERSION"
 
 "$SCRIPTS/publish.sh"
 
-set_project_version "$NEXT_VERSION"
+set-project-version "$NEXT_VERSION"
 git add -u
 git commit -m "Prepare for next development iteration"
 
