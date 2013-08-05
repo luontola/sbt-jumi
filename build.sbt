@@ -4,7 +4,9 @@ name := "sbt-jumi"
 
 version := "0.1.1-SNAPSHOT"
 
-scalaVersion := "2.10.2"
+sbtVersion in Global := "0.13.0-RC4"
+
+scalaVersion in Global := "2.10.2"
 
 sbtPlugin := true
 
