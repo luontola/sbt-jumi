@@ -23,6 +23,8 @@ Run the tests using the command:
 Building
 --------
 
-Test with: `sbt test scripted`
+Build locally: `sbt publish-local`
 
-Publish with: `sbt publish-signed`
+Run tests: `sbt test scripted`
+
+Create new release: `./scripts/release.sh <VERSION>`
