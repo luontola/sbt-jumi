@@ -24,6 +24,8 @@ ScriptedPlugin.scriptedSettings
 
 scriptedBufferLog := false
 
+scriptedLaunchOpts += "-Dsbt-jumi.version="+version.value
+
 publishTo := {
   if (version.value.trim.endsWith("-SNAPSHOT"))
     Some(Classpaths.sbtPluginSnapshots)
