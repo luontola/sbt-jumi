@@ -24,3 +24,5 @@ Building
 --------
 
 Test with: `sbt test scripted`
+
+Publish with: `sbt publish-signed`
