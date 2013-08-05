@@ -1,4 +1,4 @@
-organization := "fi.jumi"
+organization := "fi.jumi.sbt"
 
 name := "sbt-jumi"
 
