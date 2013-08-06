@@ -20,7 +20,17 @@ Add the following line to your `build.sbt` file:
 
     jumiSettings
 
-Run the tests using the command:
+Also you will probably want to customize the default settings there.
+Here are some common ones, for the rest see [here](https://github.com/orfjackal/sbt-jumi/blob/master/src/main/scala/fi/jumi/sbt/JumiPlugin.scala):
+
+    jumiJvmOptions := Seq("-ea", "-Xmx512M")
+
+    jumiIncludedTestsPattern := "glob:com/example/**Test.class"
+
+For Jumi to run also JUnit based tests, you will additionally need to have
+JUnit in your test classpath.
+
+After everything is configured, you can run tests using the command:
 
     sbt jumi-test
 
