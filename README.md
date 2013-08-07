@@ -7,8 +7,8 @@ The binaries of this plugin are available in the [sbt plugin repository](http://
 where sbt will find them automatically.
 
 
-User Guide
-----------
+Quick Start
+-----------
 
 Requires sbt 0.13.0
 
@@ -33,6 +33,20 @@ JUnit in your test classpath.
 After everything is configured, you can run tests using the command:
 
     sbt jumi-test
+
+
+### Using a Different Jumi Version ###
+
+When new versions of Jumi are released, this plugin may not get a new
+release if it's compatible with the new Jumi version. In that case you can
+override sbt's plugin dependencies to change the Jumi version being used.
+
+Add the following line to your `project/plugins.sbt` file:
+
+    dependencyOverrides += "fi.jumi" % "jumi-launcher" % "<the new version>"
+
+See [sbt's documentation](http://www.scala-sbt.org/release/docs/Detailed-Topics/Library-Management.html)
+for more information.
 
 
 Building
