@@ -15,7 +15,7 @@ Requires sbt 0.13.0
 
 Add the following line to your `project/plugins.sbt` file:
 
-    addSbtPlugin("fi.jumi.sbt" % "sbt-jumi" % "0.1.0")
+    addSbtPlugin("fi.jumi.sbt" % "sbt-jumi" % "0.1.1")
 
 Add the following line to your `build.sbt` file:
 
@@ -65,7 +65,7 @@ Create new release: `./scripts/release.sh <VERSION>`
 Version History
 ---------------
 
-### Next Release
+### sbt-jumi 0.1.1 (2013-08-07)
 
 - Upgraded to Jumi 0.5.390. Fixes `jumiDebugModeEnabled := true` closing the standard output stream
 
