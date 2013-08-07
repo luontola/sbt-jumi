@@ -14,7 +14,7 @@ resolvers += Opts.resolver.mavenLocalFile
 
 resolvers += Opts.resolver.sonatypeReleases
 
-libraryDependencies += "fi.jumi" % "jumi-launcher" % "0.5.376"
+libraryDependencies += "fi.jumi" % "jumi-launcher" % "0.5.390"
 
 libraryDependencies += "com.novocode" % "junit-interface" % "0.8" % "test->default"
 

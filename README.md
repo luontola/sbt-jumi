@@ -65,6 +65,10 @@ Create new release: `./scripts/release.sh <VERSION>`
 Version History
 ---------------
 
+### Next Release
+
+- Upgraded to Jumi 0.5.390. Fixes `jumiDebugModeEnabled := true` closing the standard output stream
+
 ### sbt-jumi 0.1.0 (2013-08-05)
 
 - Initial release
