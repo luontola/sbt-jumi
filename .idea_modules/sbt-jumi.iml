@@ -24,10 +24,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="SBT: fi.jumi:jumi-launcher:0.5.376" level="project" />
-    <orderEntry type="library" name="SBT: fi.jumi:jumi-core:0.5.376" level="project" />
+    <orderEntry type="library" name="SBT: fi.jumi:jumi-launcher:0.5.390" level="project" />
+    <orderEntry type="library" name="SBT: fi.jumi:jumi-core:0.5.390" level="project" />
     <orderEntry type="library" name="SBT: fi.jumi:jumi-actors:0.1.196" level="project" />
-    <orderEntry type="library" name="SBT: fi.jumi:jumi-api:0.5.376" level="project" />
+    <orderEntry type="library" name="SBT: fi.jumi:jumi-api:0.5.390" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="SBT: org.scala-lang:scala-library:2.10.2:provided" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="SBT: org.scala-sbt:sbt:0.13.0-RC4:provided" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="SBT: org.scala-sbt:main:0.13.0-RC4:provided" level="project" />
