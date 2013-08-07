@@ -7,3 +7,5 @@ jumiSettings
 jumiJvmOptions := Seq("-ea", "-Xmx512M")
 
 jumiIncludedTestsPattern := "glob:com/example/**{Test,Spec}.class"
+
+//jumiDebugModeEnabled := true
